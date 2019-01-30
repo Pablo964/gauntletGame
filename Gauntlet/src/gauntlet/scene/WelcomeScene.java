@@ -39,7 +39,7 @@ public class WelcomeScene extends GauntletScene
                 if(activeKeys.contains(KeyCode.SPACE))
                 {
                     this.stop();
-                    Gauntlet.setScene(Gauntlet.GAME_SCENE);
+                    Gauntlet.setScene(Gauntlet.PLAYER_SELECT_SCENE);
                 } 
                 else if (activeKeys.contains(KeyCode.ESCAPE)) 
                 {

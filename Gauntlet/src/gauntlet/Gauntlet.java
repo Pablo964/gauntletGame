@@ -12,10 +12,11 @@ import gauntlet.scene.*;
 
 public class Gauntlet extends Application {
 
-    public static final int MAX_SCENES = 3;
+    public static final int MAX_SCENES = 4;
     public static final int WELCOME_SCENE = 0;
-    public static final int GAME_SCENE = 1;
-    public static final int GAME_OVER_SCENE = 2;
+    public static final int PLAYER_SELECT_SCENE = 1;
+    public static final int GAME_SCENE = 2;
+    public static final int GAME_OVER_SCENE = 3;
     public static final GauntletScene[] scenes = new GauntletScene[MAX_SCENES];
     private static Stage primaryStage;
 
@@ -24,8 +25,9 @@ public class Gauntlet extends Application {
     {
         this.primaryStage = primaryStage;
         scenes[0] = new WelcomeScene();
-        scenes[1] = new GameScene();
-        scenes[2] = new GameOverScene();
+        scenes[1] = new PlayerSelectScene();
+        scenes[2] = new GameScene();
+        scenes[3] = new GameOverScene();
         primaryStage.setTitle("Gauntlet");
         setScene(WELCOME_SCENE);
         primaryStage.show();
@@ -49,5 +51,4 @@ public class Gauntlet extends Application {
     {
         launch(args);
     }
-
 }

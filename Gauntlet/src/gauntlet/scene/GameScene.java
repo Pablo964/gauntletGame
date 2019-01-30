@@ -47,6 +47,6 @@ public class GameScene extends GauntletScene {
 
                 gc.drawImage(imgCharacter, 100, 200);
             }
-        }.start();
+        }.start();  
     }
 }
