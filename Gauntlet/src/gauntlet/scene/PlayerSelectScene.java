@@ -19,10 +19,13 @@ public class PlayerSelectScene extends GauntletScene
     private Image imgBackground;
     private Image imgHand;
     
+    private int positionX = 510;
+    private static int positionY;
+    
     public PlayerSelectScene()
     {
         super();
-    
+        this.positionY = 125;
         try
         {
             imgBackground = new Image(Files.newInputStream(
@@ -36,6 +39,11 @@ public class PlayerSelectScene extends GauntletScene
         }     
     }
     
+    public static int getPositionY()
+    {
+        return positionY;
+    }
+    
     @Override
     public void draw()
     {
@@ -43,12 +51,8 @@ public class PlayerSelectScene extends GauntletScene
         
         new AnimationTimer()
         {
-            int positionX = 510;
-            int positionY = 125;
             public void handle(long currentNanoTime) 
             {
-                
-                
                 if (activeKeys.contains(KeyCode.SPACE))
                 {
                     this.stop();
@@ -57,17 +61,19 @@ public class PlayerSelectScene extends GauntletScene
 
                 if (releasedKeys.contains(KeyCode.UP) && positionY > 125) 
                 {
-                    releasedKeys.remove(KeyCode.UP);
+                    
                     positionY -= 105;
                     
                 }
                 else if (releasedKeys.contains(KeyCode.DOWN) && positionY < 440) 
                 {
                     
-                    positionY += 105;
-                    releasedKeys.remove(KeyCode.DOWN);
+                    positionY += 105;  
                 }
-
+                
+                releasedKeys.remove(KeyCode.UP);
+                releasedKeys.remove(KeyCode.DOWN);
+                
                 gc.drawImage(imgBackground, 0, 0);
                 gc.drawImage(imgHand, positionX, positionY);
             }

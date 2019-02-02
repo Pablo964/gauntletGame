@@ -8,14 +8,41 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
-public class GameScene extends GauntletScene {
-
-    public static String CHARACTER_PATH = "img/warrior.png";
+public class GameScene extends GauntletScene 
+{
+    public static String CHARACTER_PATH;
     private Image imgCharacter;
-
+    int HandPositionY;
+    
+    
     public GameScene() 
     {
-        super();
+        super();     
+    }
+       
+    @Override
+    public void draw() 
+    {
+        activeKeys.clear();
+        
+        this.HandPositionY = PlayerSelectScene.getPositionY();
+       
+        if (HandPositionY == 125) 
+        {
+            CHARACTER_PATH = "img/warrior.png";
+        }
+        else if (HandPositionY == 230)
+        {
+            CHARACTER_PATH = "img/valkyrie.png";
+        }
+        else if (HandPositionY == 335)
+        {
+            CHARACTER_PATH = "img/sorcerer.png";
+        }
+        else
+        {
+            CHARACTER_PATH = "img/dwarf.png";
+        }
         
         try 
         {
@@ -25,13 +52,6 @@ public class GameScene extends GauntletScene {
         catch (Exception e) 
         {
         }
-    }
-
-    @Override
-    public void draw() 
-    {
-        activeKeys.clear();
-
         new AnimationTimer() 
         {
             public void handle(long currentNanoTime) {
@@ -44,7 +64,7 @@ public class GameScene extends GauntletScene {
                     this.stop();
                     Gauntlet.setScene(Gauntlet.GAME_OVER_SCENE);
                 }
-
+                
                 gc.drawImage(imgCharacter, 100, 200);
             }
         }.start();  
