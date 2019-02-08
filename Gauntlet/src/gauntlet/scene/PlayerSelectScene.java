@@ -10,73 +10,59 @@ import javafx.scene.input.KeyCode;
 
 public class PlayerSelectScene extends GauntletScene
 {
-    public static final String PLAYER_SELECT_SCREEN_PATH = 
-            "img/player_select_screen.png"; 
+    public static final String PLAYER_SELECT_SCENE_PATH = "img/player_select_screen.png";
+    public static final String POINTER_PATH = "img/choose_player.png";
     
-    public static final String CHOOSE_PLAYER_PATH = 
-            "img/choose_player.png"; 
+    public static final int STARTING_POINTER_X = 510;
+    public static final int STARTING_POINTER_Y = 125;
+    public static final int POINTER_Y_INCREMENT = 105;
     
     private Image imgBackground;
-    private Image imgHand;
-    
-    private int positionX = 510;
-    private static int positionY;
+    private Image imgPointer;
+    protected static int chosenPlayer;
+    private int chosenPlayerY;
     
     public PlayerSelectScene()
     {
         super();
-        this.positionY = 125;
+        
+        chosenPlayer = 0;
+        chosenPlayerY = STARTING_POINTER_Y;
+        
         try
         {
-            imgBackground = new Image(Files.newInputStream(
-                    Paths.get(PLAYER_SELECT_SCREEN_PATH)));
-            
-            imgHand = new Image(Files.newInputStream(
-                    Paths.get(CHOOSE_PLAYER_PATH)));
-        } 
-        catch (Exception e) 
-        {
-        }     
+            imgBackground = new Image(Files.newInputStream(Paths.get(PLAYER_SELECT_SCENE_PATH)));
+            imgPointer = new Image(Files.newInputStream(Paths.get(POINTER_PATH)));            
+        } catch (Exception e) {
+            return;
+        }                
     }
-    
-    public static int getPositionY()
-    {
-        return positionY;
-    }
-    
+
     @Override
-    public void draw()
+    public void draw() 
     {
         activeKeys.clear();
         
         new AnimationTimer()
         {
-            public void handle(long currentNanoTime) 
+            public void handle(long currentNanoTime)
             {
-                if (activeKeys.contains(KeyCode.SPACE))
+                if(activeKeys.contains(KeyCode.SPACE))
                 {
                     this.stop();
                     Gauntlet.setScene(Gauntlet.GAME_SCENE);
+                } else if (releasedKeys.contains(KeyCode.UP) && chosenPlayer > 0) {
+                    chosenPlayer--;
+                    chosenPlayerY -= POINTER_Y_INCREMENT;
+                } else if (releasedKeys.contains(KeyCode.DOWN) && chosenPlayer < 3) {
+                    chosenPlayer++;
+                    chosenPlayerY += POINTER_Y_INCREMENT;
                 }
-
-                if (releasedKeys.contains(KeyCode.UP) && positionY > 125) 
-                {
-                    
-                    positionY -= 105;
-                    
-                }
-                else if (releasedKeys.contains(KeyCode.DOWN) && positionY < 440) 
-                {
-                    
-                    positionY += 105;  
-                }
+                gc.drawImage(imgBackground, 0, 0);    
+                gc.drawImage(imgPointer, STARTING_POINTER_X, chosenPlayerY);
                 
-                releasedKeys.remove(KeyCode.UP);
-                releasedKeys.remove(KeyCode.DOWN);
-                
-                gc.drawImage(imgBackground, 0, 0);
-                gc.drawImage(imgHand, positionX, positionY);
+                releasedKeys.clear();
             }
-        }.start();
+        }.start();        
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public abstract class GauntletScene extends Scene
 {
@@ -16,6 +18,9 @@ public abstract class GauntletScene extends Scene
     protected Set<KeyCode> activeKeys;
     protected Set<KeyCode> releasedKeys;
     protected GraphicsContext gc;
+    
+    protected MediaPlayer mediaPlayer;
+    protected Media sound;
     
     public GauntletScene()
     {

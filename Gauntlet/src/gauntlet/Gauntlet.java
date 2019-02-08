@@ -39,13 +39,10 @@ public class Gauntlet extends Application {
         scenes[numScene].draw();
     }
 
-    public static void exit() {
+    public static void exit() 
+    {
         primaryStage.hide();
     }
-
-    /**
-     * @param args the command line arguments
-     */
     
     public static void main(String[] args)
     {

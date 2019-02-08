@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/scene/PlayerSelectScene.java</file>
-            <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/Gauntlet.java</file>
+            <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/sprite/Warrior.java</file>
             <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/scene/GameScene.java</file>
+            <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/sprite/Valkyrie.java</file>
+            <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/sprite/Dwarf.java</file>
+            <file>file:/D:/1_DAM/entornos/anexo2/Gauntlet/src/gauntlet/sprite/Sorcerer.java</file>
         </group>
     </open-files>
 </project-private>
