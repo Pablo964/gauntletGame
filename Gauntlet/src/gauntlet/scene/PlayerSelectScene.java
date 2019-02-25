@@ -1,13 +1,16 @@
 package gauntlet.scene;
 
 import gauntlet.Gauntlet;
-import static java.lang.System.gc;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
+/**
+ * Scene to choose player before starting the game
+ * @author nacho
+ */
 public class PlayerSelectScene extends GauntletScene
 {
     public static final String PLAYER_SELECT_SCENE_PATH = "img/player_select_screen.png";
@@ -65,4 +68,4 @@ public class PlayerSelectScene extends GauntletScene
             }
         }.start();        
     }
-}
+}    
