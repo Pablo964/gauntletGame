@@ -8,11 +8,11 @@ public class Treasure extends StaticSprite
     {
         this.x = x;
         this.y = y;
-        this.spriteX = 1390;
+        this.spriteX = 1198;
         this.spriteY = 340;
     }
     
-    public int getPoints() 
+    public int getPointsTreasure() 
     {
         return TREASURE_SCORE;
     }

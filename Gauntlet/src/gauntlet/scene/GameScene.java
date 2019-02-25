@@ -1,6 +1,7 @@
 package gauntlet.scene;
 
 import gauntlet.Gauntlet;
+import gauntlet.sprite.CaveDweller;
 import gauntlet.sprite.Dwarf;
 import gauntlet.sprite.Enemy;
 import gauntlet.sprite.ExitPoint;
@@ -53,7 +54,7 @@ public class GameScene extends GauntletScene
     private Wall wall;
     private List<Enemy> enemies;
     private List<Food> food;
-   // private List<Treasure> treasure;
+    private List<Treasure> treasure;
     
     private ExitPoint exit;
     
@@ -61,6 +62,7 @@ public class GameScene extends GauntletScene
     
     private static final long ENERGY_UPDATE = 1000000000;
     private static final int ENERGY_DECREASE = 10;
+    private static final int POINTS_INCREASED = 10;
     
     private long currentTime = 0;
        
@@ -77,16 +79,20 @@ public class GameScene extends GauntletScene
         Enemy enemy = new Ghost();
         enemy.moveTo(700, 200);
         Enemy enemy2 = new Ghost();
+        Enemy enemy3 = new CaveDweller();
+        enemy3.moveTo(700, 100);
         enemy.moveTo(600, 400);
         enemies.add(enemy);
         enemies.add(enemy2);
+        enemies.add(enemy3);
         exit = new ExitPoint(200, 300);
         
         food = new ArrayList<>();
         food.add(new Potion(100, 300));
         food.add(new Meat(50, 50));
         
-        //treasure.add(new Treasure(400, 253));
+        treasure = new ArrayList<>();
+        treasure.add(new Treasure(400, 253));
     }
 
     @Override
@@ -137,9 +143,7 @@ public class GameScene extends GauntletScene
                 gc.strokeLine(0, BOTTOM_LIMIT,
                     GauntletScene.GAME_WIDTH, BOTTOM_LIMIT);
                 drawEnergy();
-                gc.setFill(Color.GREEN);
-                gc.fillText("POINTS:", GauntletScene.GAME_WIDTH - 200,
-                        BOTTOM_LIMIT + 50);
+                drawPoints();
                 
                 
                 if(activeKeys.contains(KeyCode.ESCAPE)||
@@ -178,7 +182,11 @@ public class GameScene extends GauntletScene
                         {
                             if (weapons.get(i).collidesWith(enemies.get(j)))
                             {
+                                character.setPoints(
+                                        treasure.get(i).getPointsTreasure());
+                                drawPoints();
                                 enemies.remove(j);
+                                character.removeWeapon(i);
                             }
                             else
                             {
@@ -213,20 +221,21 @@ public class GameScene extends GauntletScene
                 {
                     character.moveTo(oldX, oldY);
                 }
-               /* 
+                
+                i = 0;
                 while (i < treasure.size()) 
                 {
                     if (character.collidesWith(treasure.get(i))) 
                     {
-                        character.setPoints(treasure.get(i).getPoints());
-                        drawEnergy();
+                        character.setPoints(treasure.get(i).getPointsTreasure());
+                        drawPoints();
                         treasure.remove(i);
                     } 
                     else 
                     {
                         i++;
                     }
-                }*/
+                }
 
                 for (Enemy enemy : enemies) 
                 {
@@ -260,6 +269,11 @@ public class GameScene extends GauntletScene
                 for (Food f: food)
                 {
                     f.draw(gc);
+                }
+                
+                for (Treasure t: treasure)
+                {
+                    t.draw(gc);
                 }
             }
         }.start();        
@@ -319,4 +333,12 @@ public class GameScene extends GauntletScene
         int totalDecrease = ENERGY_DECREASE;
         character.setEnergy(-totalDecrease);
     }
+    
+    private void drawPoints()
+    {
+        gc.setFill(Color.GREEN);
+        gc.fillText("POINTS: " + character.getPoints(), 
+                GauntletScene.GAME_WIDTH - 200, BOTTOM_LIMIT + 50);
+    }
+    
 }
